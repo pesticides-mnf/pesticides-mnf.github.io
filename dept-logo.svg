@@ -9,10 +9,10 @@
   <circle cx="200" cy="200" r="184" fill="none" stroke="#1E5B35" stroke-width="11"/>
   <path d="M 78 248 A 130 130 0 1 1 322 248" fill="none" stroke="#9DBF4E" stroke-width="4" stroke-linecap="round"/>
 
-  <g font-family="Alexandria, 'IBM Plex Sans Arabic', sans-serif" font-weight="700" font-size="31" fill="#1E5B35" text-anchor="middle">
-    <text x="294.5" y="87.4" transform="rotate(40 294.5 87.4)">قسم</text>
-    <text x="215.4" y="53.8" transform="rotate(6 215.4 53.8)">مبيدات</text>
-    <text x="126.5" y="72.7" transform="rotate(-30 126.5 72.7)">الآفات</text>
+  <g font-family="Alexandria, 'IBM Plex Sans Arabic', sans-serif" font-weight="700" font-size="30" fill="#1E5B35" text-anchor="middle">
+    <text x="297.8" y="90.3" textLength="46" lengthAdjust="spacingAndGlyphs" transform="rotate(41.7 297.8 90.3)">قسم</text>
+    <text x="216.0" y="53.9" textLength="88" lengthAdjust="spacingAndGlyphs" transform="rotate(6.2 216.0 53.9)">مبيدات</text>
+    <text x="114.7" y="80.3" textLength="78" lengthAdjust="spacingAndGlyphs" transform="rotate(-35.5 114.7 80.3)">الآفات</text>
   </g>
   <circle cx="50" cy="246" r="5" fill="#1E5B35"/>
   <circle cx="350" cy="246" r="5" fill="#1E5B35"/>

@@ -195,7 +195,10 @@ h2.in .w{opacity:1;transform:none;filter:none}
 .ocard .k{font-family:var(--display);font-size:12px;color:var(--leaf)}
 .ocard h3{font-family:var(--display);font-weight:700;font-size:18px;margin:2px 0 4px}
 .ocard p{font-size:14px;color:var(--muted)}
-.ocard .anim{animation:cardIn .45s cubic-bezier(.2,.8,.2,1)}
+.ocard .anim{animation:oSlide .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes oSlide{from{opacity:0;transform:translateX(var(--sx,0))}to{opacity:1;transform:none}}
+.otree{touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.oswipe{text-align:center;font-family:var(--display);font-size:11.5px;color:var(--muted);margin-top:6px;opacity:.8}
 .odots{display:flex;justify-content:center;gap:6px;margin-top:10px}
 .odots i{width:7px;height:7px;border-radius:99px;background:#2C4A36;transition:all .3s}
 .odots i.on{width:20px;background:var(--lime)}
@@ -631,8 +634,8 @@ footer{border-top:1px solid var(--line);padding:26px max(26px,env(safe-area-inse
       </svg>
       <div class="ocard" id="ocard" aria-live="polite"></div>
       <div class="odots" id="odots"></div>
+      <div class="oswipe">⇆ اسحب للتنقل بين الأهداف</div>
     </div>
-    <button class="linkbtn" id="oAll">☰ عرض كل الأهداف كقائمة</button>
     <ol class="objs" id="objsList" hidden>
       <li class="reveal" style="--d:0s"><div><b class="ot">إعداد كفاءات متميزة</b>تأهيل خريجين متميزين أكاديميًا ومهنيًا في مجال وقاية النبات ومبيدات الآفات.</div></li>
       <li class="reveal" style="--d:.08s"><div><b class="ot">تعزيز التنافسية في سوق العمل</b>تمكين الخريجين من المنافسة بكفاءة في أسواق العمل على المستويين المحلي والدولي.</div></li>
@@ -1026,6 +1029,7 @@ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ar=n=>Number(n).toLocaleString('ar-EG',{useGrouping:false});
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 
+const buzz=p=>{try{if(navigator.vibrate)navigator.vibrate(p)}catch(e){}};
 /* split headings into words */
 $$('h2.split').forEach(h=>{
   const small=h.querySelector('small'); if(small) small.remove();
@@ -1183,15 +1187,22 @@ NP.forEach(([x,y],i)=>{
   onodes.insertAdjacentHTML('beforeend',`<g class="onode" style="--i:${i}" data-i="${i}" role="button" tabindex="0" aria-label="الهدف ${i+1}">${lf}<circle class="ring" cx="${x}" cy="${y}" r="17" style="transform-box:fill-box;transform-origin:center"/><circle class="c" cx="${x}" cy="${y}" r="17"/><text x="${x}" y="${y+5}" text-anchor="middle">${ar(i+1)}</text></g>`);
   odots.insertAdjacentHTML('beforeend','<i></i>');
 });
-let oCur=-1, oAuto=null, oUser=false;
+let oCur=-1, oAuto=null, oUser=false, oDir=1;
 function oShow(i){
   oCur=i; $$('.onode').forEach((n,k)=>n.classList.toggle('on',k===i)); $$('.ob').forEach(b=>b.classList.remove('on')); $('#ob'+i).classList.add('on');
   [...odots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
-  $('#ocard').innerHTML=`<div class="anim"><div class="k">الهدف ${ar(i+1)} من ${ar(OB.length)}</div><h3>${OB[i].t}</h3><p>${OB[i].x}</p></div>`;
+  $('#ocard').innerHTML=`<div class="anim" style="--sx:${oDir*-28}px"><div class="k">الهدف ${ar(i+1)} من ${ar(OB.length)}</div><h3>${OB[i].t}</h3><p>${OB[i].x}</p></div>`;
 }
-$$('.onode').forEach(n=>{const go=()=>{oUser=true;clearInterval(oAuto);oShow(+n.dataset.i)};n.addEventListener('click',go);n.addEventListener('keydown',e=>{if(e.key==='Enter')go()})});
+$$('.onode').forEach(n=>{const go=()=>{oUser=true;clearInterval(oAuto);oDir=+n.dataset.i>oCur?1:-1;oShow(+n.dataset.i)};n.addEventListener('click',go);n.addEventListener('keydown',e=>{if(e.key==='Enter')go()})});
 new IntersectionObserver(es=>{ if(es[0].isIntersecting){ if(oCur<0) setTimeout(()=>oShow(0),1300); if(!oUser&&!oAuto) oAuto=setInterval(()=>oShow((oCur+1)%OB.length),4500);} else {clearInterval(oAuto);oAuto=null} },{threshold:.3}).observe($('#otree'));
-$('#oAll').onclick=()=>{const l=$('#objsList');l.hidden=!l.hidden;$('#oAll').textContent=l.hidden?'☰ عرض كل الأهداف كقائمة':'✕ إخفاء القائمة'};
+// swipe between objectives (RTL: drag right = next)
+(function(){const el=$('#otree');let sx=0,sy=0,on=false;
+  el.addEventListener('pointerdown',e=>{on=true;sx=e.clientX;sy=e.clientY},{passive:true});
+  el.addEventListener('pointerup',e=>{if(!on)return;on=false;const dx=e.clientX-sx,dy=e.clientY-sy;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3){oUser=true;clearInterval(oAuto);const n=OB.length;
+      oDir=dx>0?1:-1; oShow((oCur+(dx>0?1:-1)+n)%n); buzz(15);}},{passive:true});
+  el.addEventListener('pointercancel',()=>on=false);
+})();
 
 /* ================= COURSES ================= */
 const CR={3:[['ت ٣٠٢','مبيدات آفات',1,2,2,3],['ت ٣٢١','مبيدات حشائش',0,2,2,3],['ت ٣٢٢','مبيدات حيوية',0,2,2,3]],
@@ -1220,8 +1231,6 @@ $$('.pbtn').forEach(b=>b.onclick=()=>{const k=b.dataset.k; worn.has(k)?worn.dele
   buzz(worn.has(k)?20:10); b.classList.toggle('on',worn.has(k)); if(worn.size===5) buzz([30,50,30,50,90]); document.querySelector(`.pl[data-k="${k}"]`).classList.toggle('on',worn.has(k)); ppeUpd();});
 ppeUpd();
 
-/* ================= HAPTICS ================= */
-const buzz=p=>{try{if(navigator.vibrate)navigator.vibrate(p)}catch(e){}};
 
 /* ================= LENS GAME ================= */
 const SP=[
