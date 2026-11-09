@@ -489,6 +489,50 @@ h2.in .w{opacity:1;transform:none;filter:none}
 .g-prof .t{color:var(--leaf)} .g-dr .t{color:var(--sky)} .g-asst .t{color:var(--amber)}
 .tm .em{font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:0 8px}
 
+/* team orbit */
+.orb{margin-top:18px;background:radial-gradient(90% 60% at 50% 32%,#16301F,#0D1A13 70%);border:1px solid var(--line);border-radius:22px;overflow:hidden;padding-bottom:12px}
+.orb-stage{position:relative;width:min(100%,380px);aspect-ratio:1;margin:0 auto;--w:min(calc(100vw - 110px),380px)}
+.orb-line{position:absolute;left:50%;top:50%;border-radius:50%;border:1px dashed rgba(143,208,106,.18);transform:translate(-50%,-50%);pointer-events:none;transition:border-color .4s}
+.orb-line.l1{width:45%;height:45%}.orb-line.l2{width:68%;height:68%}.orb-line.l3{width:90%;height:90%}
+.orb-rot{position:absolute;inset:0;animation:orbSpin var(--dur) linear infinite;pointer-events:none}
+.orb-rot{--dur:90s}
+@keyframes orbSpin{to{transform:rotate(360deg)}}
+.orb-stage.paused .orb-rot,.orb-stage.paused .orb-rot .av{animation-play-state:paused}
+.orb-p{position:absolute;width:11%;aspect-ratio:1;margin:-5.5% 0 0 -5.5%;pointer-events:auto;padding:0;border-radius:50%;transition:transform .35s cubic-bezier(.2,.9,.3,1.5),opacity .35s,filter .35s}
+.orb-p .av{width:100%;height:100%;font-size:clamp(13px,4.2vw,18px);box-shadow:0 6px 16px rgba(0,0,0,.4)}
+.orb-rot .orb-p .av{animation:orbSpin var(--dur) linear infinite reverse}
+.orb-p.on{transform:scale(1.35);z-index:3}
+.orb-p.on .av{box-shadow:0 0 0 3px #0D1A13,0 0 0 5px var(--lime),0 0 24px rgba(198,234,75,.55)}
+.orb-stage.focus .orb-p:not(.on):not(.orb-head){opacity:.55;filter:saturate(.6)}
+.orb-stage.ringsel .orb-p{opacity:.25;filter:grayscale(1)}
+.orb-stage.ringsel .orb-p.inring{opacity:1;filter:none}
+.orb-head{left:50%;top:50%;width:22%;margin:-11% 0 0 -11%}
+.orb-head .av{font-size:clamp(22px,7vw,32px)!important;box-shadow:0 0 0 4px rgba(198,234,75,.2),0 0 40px rgba(198,234,75,.35)!important}
+.orb-head::after{content:"★";position:absolute;top:-4%;right:-2%;width:30%;aspect-ratio:1;border-radius:50%;background:var(--amber);color:#1b1405;display:grid;place-items:center;font-size:clamp(9px,2.6vw,12px);box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.orb-head.on{transform:scale(1.12)}
+.orb-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0 12px}
+.ol{display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-family:var(--display);font-size:11.5px;color:var(--muted);transition:all .3s}
+.ol::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+.ol.on{border-color:var(--c);color:var(--text);background:rgba(255,255,255,.04)}
+.orb-card{margin:12px 12px 0;display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;min-height:92px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.orb-card .av{width:56px;height:56px;flex:0 0 56px;font-size:24px}
+.orb-card .in{animation:oSlide .45s cubic-bezier(.2,.8,.2,1);min-width:0}
+.orb-card b{display:block;font-family:var(--display);font-weight:700;font-size:16px;line-height:1.5}
+.orb-card .t{font-size:12.5px;color:var(--muted)}
+.orb-card .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.orb-card .tg{font-family:var(--display);font-size:10.5px;padding:1px 9px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.orb-card .tg.hd{background:var(--lime);border-color:var(--lime);color:#12200f}
+.orb-card .tg.em{border-color:rgba(242,179,61,.5);color:var(--amber)}
+.orb-nav{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:10px 12px 0}
+.orb-nav .gbtn{margin:0;padding:9px 6px;font-size:13px}
+.orb-nav span{font-family:var(--display);font-size:12px;color:var(--muted);min-width:56px;text-align:center}
+.tm-list{margin-top:14px;display:grid;gap:12px}
+.tl-g h4{font-family:var(--display);font-weight:500;font-size:13px;color:var(--c);display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.tl-g h4::after{content:"";flex:1;height:1px;background:var(--line)}
+.tl-r{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:right;padding:9px 12px;border-radius:12px;background:var(--card);border:1px solid var(--line);margin-bottom:5px;font-size:13.5px;transition:border-color .3s,background .3s}
+.tl-r small{font-size:11px;color:var(--muted);white-space:nowrap}
+.tl-r.on{border-color:var(--lime);background:rgba(198,234,75,.06)}
+
 /* end */
 .end{text-align:center;padding:100px 0 50px}
 .seals{display:flex;justify-content:center;gap:22px;margin-bottom:26px}
@@ -820,9 +864,17 @@ footer{border-top:1px solid var(--line);padding:26px max(26px,env(safe-area-inse
   <section class="stage" id="sTeam" data-stage>
     <div class="num reveal">٠٨ · الفريق</div>
     <h2 class="split">أعضاء هيئة التدريس<small>والهيئة المعاونة بقسم مبيدات الآفات</small></h2>
-    <div class="tm-head reveal" id="tmHead"></div>
-    <div class="tm-filter reveal" id="tmFilter"></div>
-    <div class="tm-grid" id="tmGrid"></div>
+    <div class="orb reveal" id="orb">
+      <div class="orb-stage" id="orbStage">
+        <div class="orb-line l1"></div><div class="orb-line l2"></div><div class="orb-line l3"></div>
+        <div class="orb-rot" data-ring="1"></div><div class="orb-rot" data-ring="2"></div><div class="orb-rot" data-ring="3"></div>
+        <button class="orb-p orb-head g-prof" id="orbHead" data-i="0"><span class="av"></span></button>
+      </div>
+      <div class="orb-legend" id="orbLegend"></div>
+      <div class="orb-card" id="orbCard" aria-live="polite"></div>
+      <div class="orb-nav"><button class="gbtn ghost" id="orbPrev">→ السابق</button><span id="orbIdx"></span><button class="gbtn ghost" id="orbNext">التالي ←</button></div>
+    </div>
+    <div class="tm-list reveal" id="tmList"></div>
   </section>
 </main>
 
@@ -1129,7 +1181,7 @@ if(N) draw();
 
 /* tap leaf burst (outside interactive widgets) */
 if(!RM) addEventListener('pointerdown',e=>{
-  if(e.target.closest('button,a,input,.game,.lab,.otree,.ppe,.fc,.seg,.jy,.scope,.tm')) return;
+  if(e.target.closest('button,a,input,.game,.lab,.otree,.ppe,.fc,.seg,.jy,.scope,.orb,.tm-list')) return;
   for(let i=0;i<7;i++){
     const d=document.createElement('i'); d.className='burst';
     d.style.left=e.clientX+'px'; d.style.top=e.clientY+'px';
@@ -1315,38 +1367,63 @@ const SP=[
   (function wob(t){ if(!idle) return; if(!RM){const a=(t-t0)/900; place(200+Math.sin(a)*22,120+Math.cos(a*1.3)*10);} requestAnimationFrame(wob)})(t0);
 })();
 
-/* ================= TEAM ================= */
+/* ================= TEAM (orbit) ================= */
 (function(){
-  // source: department staff list provided by the department (Nov 2026); head of department & emeritus status: student guide 2026/2027
+  // source: staff list confirmed by the department (Nov 2026)
   const T=[
-    ['منال عبد الرؤوف عبد المجيد','prof','أ.د.',{head:1}],
-    ['زينب عبد الغني البرماوي','prof','أ.د.',{em:'أستاذ متفرغ'}],
-    ['أنور السيد أحمد الشيخ','prof','أ.د.',{em:'أستاذ متفرغ'}],
-    ['جمال السيد سعيد أبو الغار','prof','أ.د.',{em:'أستاذ متفرغ'}],
-    ['محمود حسان رشوان سيف الدين','prof','أ.د.',{em:'أستاذ متفرغ'}],
-    ['هاجر علي محمود عمار','dr','أ.م.د.',{r:'أستاذ مساعد'}],
-    ['سماح سعيد مصيلحي عرفة','dr','أ.م.د.',{r:'أستاذ مساعد'}],
-    ['سارة محمد محمد هيكل','dr','د.',{r:'مدرس'}],
-    ['هاجر محمد سعد سالمان','dr','د.',{r:'مدرس'}],
-    ['إسراء حسن عبد الوهاب هدهد','asst','م.م.',{r:'مدرس مساعد'}],
-    ['زينب الشحات مرسي سليمان','asst','م.م.',{r:'مدرس مساعد'}],
-    ['محمود مبروك عبد الغفار أبو ليلة','asst','',{r:'معيد'}],
-    ['سارة أحمد عبد الوهاب عنب','asst','',{r:'معيدة'}]
+    {n:'منال عبد الرؤوف عبد المجيد',t:'أ.د.',r:'أستاذ دكتور',g:'prof',ring:0,head:1},
+    {n:'زينب عبد الغني البرماوي',t:'أ.د.',r:'أستاذ دكتور',g:'prof',ring:1,em:1},
+    {n:'أنور السيد أحمد الشيخ',t:'أ.د.',r:'أستاذ دكتور',g:'prof',ring:1,em:1},
+    {n:'جمال السيد سعيد أبو الغار',t:'أ.د.',r:'أستاذ دكتور',g:'prof',ring:1,em:1},
+    {n:'محمود حسان رشوان سيف الدين',t:'أ.د.',r:'أستاذ دكتور',g:'prof',ring:1,em:1},
+    {n:'هاجر علي محمود عمار',t:'أ.م.د.',r:'أستاذ مساعد',g:'dr',ring:2},
+    {n:'سماح سعيد مصيلحي عرفة',t:'أ.م.د.',r:'أستاذ مساعد',g:'dr',ring:2},
+    {n:'سارة محمد محمد هيكل',t:'د.',r:'مدرس',g:'dr',ring:2},
+    {n:'هاجر محمد سعد سالمان',t:'د.',r:'مدرس',g:'dr',ring:2},
+    {n:'إسراء حسن عبد الوهاب هدهد',t:'م.م.',r:'مدرس مساعد',g:'asst',ring:3},
+    {n:'زينب الشحات مرسي سليمان',t:'م.م.',r:'مدرس مساعد',g:'asst',ring:3},
+    {n:'محمود مبروك عبد الغفار أبو ليلة',t:'',r:'معيد',g:'asst',ring:3},
+    {n:'سارة أحمد عبد الوهاب عنب',t:'',r:'معيدة',g:'asst',ring:3}
   ];
-  const RN={prof:'أستاذ دكتور',dr:'دكتور',asst:''};
-  const G=[['all','الكل'],['prof','الأساتذة'],['dr','أساتذة مساعدون ومدرسون'],['asst','الهيئة المعاونة']];
-  const first=n=>n.trim()[0];
-  const head=T.find(x=>x[3]&&x[3].head);
-  $('#tmHead').innerHTML=`<div class="av g-prof">${first(head[0])}</div><div style="position:relative;z-index:1"><span class="role">رئيس مجلس القسم</span><b>${head[2]} ${head[0]}</b><span class="t">أستاذ دكتور · قسم مبيدات الآفات</span></div>`;
-  $('#tmFilter').innerHTML=G.map(([k,n],i)=>`<button class="tf${i?'':' on'}" data-k="${k}">${n}<i>${ar(k==='all'?T.length:T.filter(x=>x[1]===k).length)}</i></button>`).join('');
-  function render(k){
-    const L=T.filter(x=>k==='all'||x[1]===k);
-    $('#tmGrid').innerHTML=L.map((x,i)=>{const o=x[3]||{};const role=o.r||RN[x[1]];
-      return `<div class="tm g-${x[1]}" style="--i:${i}"><div class="av">${first(x[0])}</div><b>${x[2]?x[2]+' ':''}${x[0]}</b><span class="t">${o.head?'رئيس مجلس القسم':role}</span>${o.em?`<span class="em">${o.em}</span>`:''}</div>`}).join('');
-    $$('.tm').forEach(c=>c.onclick=()=>{c.classList.remove('pulse');void c.offsetWidth;c.classList.add('pulse');buzz(10);setTimeout(()=>c.classList.remove('pulse'),600)});
+  const RINGS=[{k:0,n:'رئيس القسم',c:'#fff'},{k:1,n:'الأساتذة',c:'var(--lime)'},{k:2,n:'أساتذة مساعدون ومدرسون',c:'var(--sky)'},{k:3,n:'الهيئة المعاونة',c:'#F2B33D'}];
+  const RAD={1:22.5,2:34,3:45}, OFF={1:45,2:0,3:22.5};
+  const stage=$('#orbStage'), first=n=>n.trim()[0];
+  $('#orbHead .av').textContent=first(T[0].n);
+  [1,2,3].forEach(k=>{
+    const L=T.map((x,i)=>({...x,i})).filter(x=>x.ring===k), rot=stage.querySelector(`.orb-rot[data-ring="${k}"]`);
+    L.forEach((x,m)=>{const a=(OFF[k]+m*360/L.length)*Math.PI/180;
+      rot.insertAdjacentHTML('beforeend',`<button class="orb-p g-${x.g}" data-i="${x.i}" style="left:${50+RAD[k]*Math.sin(a)}%;top:${50-RAD[k]*Math.cos(a)}%" aria-label="${x.t} ${x.n}"><span class="av">${first(x.n)}</span></button>`)});
+  });
+  $('#orbLegend').innerHTML=RINGS.map(r=>`<button class="ol" data-k="${r.k}" style="--c:${r.c}">${r.n}<span>${ar(T.filter(x=>x.ring===r.k).length)}</span></button>`).join('');
+  const groups=[['prof','الأساتذة','var(--lime)'],['dr','أساتذة مساعدون ومدرسون','var(--sky)'],['asst','الهيئة المعاونة','var(--amber)']];
+  $('#tmList').innerHTML=groups.map(([g,n,c])=>`<div class="tl-g" style="--c:${c}"><h4>${n}</h4>${T.map((x,i)=>x.g!==g?'':`<button class="tl-r" data-i="${i}"><span>${x.t?x.t+' ':''}${x.n}</span><small>${x.head?'رئيس مجلس القسم':x.em?'أستاذ متفرغ':x.r}</small></button>`).join('')}</div>`).join('');
+  let cur=-1, dir=1, auto=null, user=false;
+  function focus(i,ringSel){
+    dir=i>cur?-1:1; cur=i; const x=T[i];
+    stage.classList.add('focus','paused'); if(!ringSel) stage.classList.remove('ringsel');
+    $$('.orb-p').forEach(b=>b.classList.toggle('on',+b.dataset.i===i));
+    $$('.tl-r').forEach(b=>b.classList.toggle('on',+b.dataset.i===i));
+    $$('.ol').forEach(b=>b.classList.toggle('on',+b.dataset.k===x.ring));
+    const tags=[x.head?'<span class="tg hd">رئيس مجلس القسم</span>':'',x.em?'<span class="tg em">أستاذ متفرغ</span>':'',`<span class="tg">${RINGS[x.ring].n}</span>`].join('');
+    $('#orbCard').innerHTML=`<span class="av g-${x.g}" style="${x.g==='prof'?'background:linear-gradient(140deg,#C6EA4B,#8FD06A)':x.g==='dr'?'background:linear-gradient(140deg,#7CC6E8,#4f9fc4)':'background:linear-gradient(140deg,#F2B33D,#d98f1f)'}">${first(x.n)}</span><div class="in" style="--sx:${dir*28}px"><b>${x.t?x.t+' ':''}${x.n}</b><span class="t">${x.r} · قسم مبيدات الآفات</span><div class="tags">${tags}</div></div>`;
+    $('#orbIdx').textContent=`${ar(i+1)} / ${ar(T.length)}`;
   }
-  $$('.tf').forEach(b=>b.onclick=()=>{$$('.tf').forEach(x=>x.classList.toggle('on',x===b));render(b.dataset.k);buzz(10)});
-  render('all');
+  function stopAuto(){user=true;clearInterval(auto);auto=null}
+  const step=d=>{stopAuto();focus((cur+d+T.length)%T.length);buzz(10)};
+  $$('.orb-p').forEach(b=>b.onclick=()=>{stopAuto();focus(+b.dataset.i);buzz(12)});
+  $$('.tl-r').forEach(b=>b.onclick=()=>{stopAuto();focus(+b.dataset.i);buzz(10);$('#orb').scrollIntoView({behavior:RM?'auto':'smooth',block:'center'})});
+  $$('.ol').forEach(b=>b.onclick=()=>{stopAuto();const k=+b.dataset.k;stage.classList.add('ringsel');
+    $$('.orb-p').forEach(p=>p.classList.toggle('inring',T[+p.dataset.i].ring===k));focus(T.findIndex(x=>x.ring===k),true);buzz(10)});
+  $('#orbNext').onclick=()=>step(1); $('#orbPrev').onclick=()=>step(-1);
+  // swipe on card (RTL: drag right = next)
+  (function(){const el=$('#orbCard');let sx=0,sy=0,on=false;
+    el.addEventListener('pointerdown',e=>{on=true;sx=e.clientX;sy=e.clientY},{passive:true});
+    el.addEventListener('pointerup',e=>{if(!on)return;on=false;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3)step(dx>0?1:-1)},{passive:true});
+    el.addEventListener('pointercancel',()=>on=false);})();
+  // tap empty stage = resume orbit
+  stage.addEventListener('click',e=>{if(e.target===stage||e.target.classList.contains('orb-line')){stage.classList.remove('paused','focus','ringsel');$$('.orb-p').forEach(b=>b.classList.remove('on'))}});
+  focus(0); stage.classList.remove('paused','focus');
+  new IntersectionObserver(es=>{ if(es[0].isIntersecting){ if(!user&&!auto) auto=setInterval(()=>{focus((cur+1)%T.length);stage.classList.remove('paused')},3200);} else {clearInterval(auto);auto=null} },{threshold:.4}).observe($('#orb'));
 })();
 
 /* ================= JOURNEY ================= */
