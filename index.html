@@ -460,6 +460,35 @@ h2.in .w{opacity:1;transform:none;filter:none}
 .cert img{width:100%;border-radius:12px;margin-top:12px;display:block;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .cert .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 
+/* team */
+.tm-head{margin-top:18px;display:flex;align-items:center;gap:14px;padding:16px;border-radius:20px;background:linear-gradient(150deg,#1d3a27,#13241C 70%);border:1px solid rgba(198,234,75,.35);position:relative;overflow:hidden}
+.tm-head::after{content:"";position:absolute;inset:-40% -20% auto auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(198,234,75,.18),transparent 70%)}
+.tm-head .av{width:64px;height:64px;flex:0 0 64px;font-size:28px}
+.tm-head .role{display:inline-block;font-family:var(--display);font-size:11.5px;color:#12200f;background:var(--lime);border-radius:99px;padding:1px 10px;margin-bottom:4px}
+.tm-head b{display:block;font-family:var(--display);font-weight:700;font-size:17px;line-height:1.45}
+.tm-head span.t{font-size:12.5px;color:var(--muted)}
+.av{display:grid;place-items:center;border-radius:50%;font-family:var(--display);font-weight:800;color:#12200f;position:relative}
+.av::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid currentColor;opacity:.35}
+.g-prof .av,.av.g-prof{background:linear-gradient(140deg,#C6EA4B,#8FD06A);color:#12200f}
+.g-dr .av{background:linear-gradient(140deg,#7CC6E8,#4f9fc4);color:#0b1a24}
+.g-asst .av{background:linear-gradient(140deg,#F2B33D,#d98f1f);color:#1b1405}
+.tm-filter{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tm-filter::-webkit-scrollbar{display:none}
+.tf{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-family:var(--display);font-size:12.5px;color:var(--muted);transition:all .3s}
+.tf i{font-style:normal;font-size:11px;background:#1c2e24;border-radius:99px;padding:0 7px;color:var(--text)}
+.tf.on{background:var(--lime);border-color:var(--lime);color:#12200f}
+.tf.on i{background:rgba(0,0,0,.15);color:#12200f}
+.tm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.tm{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:16px 10px 14px;border-radius:18px;background:var(--card);border:1px solid var(--line);animation:fcIn .5s calc(var(--i)*55ms) cubic-bezier(.2,.9,.3,1.3) both;transition:transform .25s,border-color .3s}
+.tm:active{transform:scale(.97)}
+.tm .av{width:52px;height:52px;font-size:22px;transition:transform .5s cubic-bezier(.2,.9,.3,1.5)}
+.tm:hover .av,.tm.pulse .av{transform:rotate(-8deg) scale(1.08)}
+.tm b{font-family:var(--display);font-weight:500;font-size:13.5px;line-height:1.55}
+.tm .t{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.tm .t::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.8}
+.g-prof .t{color:var(--leaf)} .g-dr .t{color:var(--sky)} .g-asst .t{color:var(--amber)}
+.tm .em{font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:0 8px}
+
 /* end */
 .end{text-align:center;padding:100px 0 50px}
 .seals{display:flex;justify-content:center;gap:22px;margin-bottom:26px}
@@ -856,12 +885,21 @@ footer{border-top:1px solid var(--line);padding:26px max(26px,env(safe-area-inse
     <p class="src" style="opacity:1">اضغط على أي مقرر عشان تقلبه وتشوف ساعاته.</p>
     <p class="src reveal">المصدر: دليل الطالب ٢٠٢٦/٢٠٢٧ (الساعات: نظري · عملي · معتمدة)</p>
   </section>
+
+  <!-- TEAM -->
+  <section class="stage" id="sTeam" data-stage>
+    <div class="num reveal">٠٨ · الفريق</div>
+    <h2 class="split">أعضاء هيئة التدريس<small>والهيئة المعاونة بقسم مبيدات الآفات</small></h2>
+    <div class="tm-head reveal" id="tmHead"></div>
+    <div class="tm-filter reveal" id="tmFilter"></div>
+    <div class="tm-grid" id="tmGrid"></div>
+  </section>
 </main>
 
 <section class="stage safety" id="s7" data-stage>
   <div class="wrap">
     <div class="warnbar reveal"></div>
-    <div class="num reveal" style="color:var(--amber)">٠٨ · درع الحماية</div>
+    <div class="num reveal" style="color:var(--amber)">٠٩ · درع الحماية</div>
     <h2 class="split">مبادئ السلامة العامة<small>في الحقل والمعمل</small></h2>
     <div class="ppe reveal" id="ppe">
       <div class="ppe-top"><b>جهّز نفسك قبل الرش</b><span id="ppeCount">٠ من ٥</span></div>
@@ -942,7 +980,7 @@ footer{border-top:1px solid var(--line);padding:26px max(26px,env(safe-area-inse
 
 <main class="wrap">
   <section class="stage" id="s8" data-stage>
-    <div class="num reveal">٠٩ · الحصاد</div>
+    <div class="num reveal">١٠ · الحصاد</div>
     <h2 class="split">من الحقل إلى الطبق<small>تابع رحلة ثمرة الطماطم… ودورنا في كل محطة</small></h2>
     <div class="jy reveal" id="jy">
       <div class="jy-stage">
@@ -1038,7 +1076,7 @@ footer{border-top:1px solid var(--line);padding:26px max(26px,env(safe-area-inse
 
   <!-- GAME -->
   <section class="stage" id="s9" data-stage>
-    <div class="num reveal">١٠ · التحدي</div>
+    <div class="num reveal">١١ · التحدي</div>
     <h2 class="split">اختبر نفسك<small>مهمة في الحقل: كل مرة مواقف مختلفة</small></h2>
     <div class="game reveal" id="game">
       <div class="gscreen on" id="gMenu">
@@ -1170,7 +1208,7 @@ if(N) draw();
 
 /* tap leaf burst (outside interactive widgets) */
 if(!RM) addEventListener('pointerdown',e=>{
-  if(e.target.closest('button,a,input,.game,.lab,.otree,.ppe,.fc,.seg,.jy,.scope')) return;
+  if(e.target.closest('button,a,input,.game,.lab,.otree,.ppe,.fc,.seg,.jy,.scope,.tm')) return;
   for(let i=0;i<7;i++){
     const d=document.createElement('i'); d.className='burst';
     d.style.left=e.clientX+'px'; d.style.top=e.clientY+'px';
@@ -1354,6 +1392,41 @@ const SP=[
   // idle wobble so people notice the lens
   let t0=performance.now();
   (function wob(t){ if(!idle) return; if(!RM){const a=(t-t0)/900; place(200+Math.sin(a)*22,120+Math.cos(a*1.3)*10);} requestAnimationFrame(wob)})(t0);
+})();
+
+/* ================= TEAM ================= */
+(function(){
+  // source: department staff list provided by the department (Nov 2026); head of department & emeritus status: student guide 2026/2027
+  const T=[
+    ['أنور السيد أحمد الشيخ','prof','أ.د.',{em:'أستاذ متفرغ'}],
+    ['زينب عبد الغني البرماوي','prof','أ.د.'],
+    ['محمود حسان رشوان سيف الدين','prof','أ.د.'],
+    ['جمال السيد سعيد أبو الغار','prof','أ.د.'],
+    ['منال عبد الرؤوف عبد المجيد','prof','أ.د.',{head:1}],
+    ['خالد مجاهد عباس حلمي','prof','أ.د.'],
+    ['هاجر علي محمود عمار','dr','د.'],
+    ['سماح سعيد مصيلحي عرفة','dr','د.'],
+    ['سارة محمد محمد هيكل','dr','د.'],
+    ['هاجر محمد سعد سالمان','asst','م.م.',{r:'مدرس مساعد'}],
+    ['إسراء حسن عبد الوهاب هدهد','asst','م.م.',{r:'مدرس مساعد'}],
+    ['زينب الشحات مرسي سليمان','asst','م.م.',{r:'مدرس مساعد'}],
+    ['محمود مبروك عبد الغفار','asst','',{r:'معيد'}],
+    ['سارة أحمد عبد الوهاب','asst','',{r:'معيدة'}]
+  ];
+  const RN={prof:'أستاذ دكتور',dr:'دكتور',asst:''};
+  const G=[['all','الكل'],['prof','الأساتذة'],['dr','الدكاترة'],['asst','الهيئة المعاونة']];
+  const first=n=>n.trim()[0];
+  const head=T.find(x=>x[3]&&x[3].head);
+  $('#tmHead').innerHTML=`<div class="av g-prof">${first(head[0])}</div><div style="position:relative;z-index:1"><span class="role">رئيس مجلس القسم</span><b>${head[2]} ${head[0]}</b><span class="t">أستاذ دكتور · قسم مبيدات الآفات</span></div>`;
+  $('#tmFilter').innerHTML=G.map(([k,n],i)=>`<button class="tf${i?'':' on'}" data-k="${k}">${n}<i>${ar(k==='all'?T.length:T.filter(x=>x[1]===k).length)}</i></button>`).join('');
+  function render(k){
+    const L=T.filter(x=>k==='all'||x[1]===k);
+    $('#tmGrid').innerHTML=L.map((x,i)=>{const o=x[3]||{};const role=o.r||RN[x[1]];
+      return `<div class="tm g-${x[1]}" style="--i:${i}"><div class="av">${first(x[0])}</div><b>${x[2]?x[2]+' ':''}${x[0]}</b><span class="t">${o.head?'رئيس مجلس القسم':role}</span>${o.em?`<span class="em">${o.em}</span>`:''}</div>`}).join('');
+    $$('.tm').forEach(c=>c.onclick=()=>{c.classList.remove('pulse');void c.offsetWidth;c.classList.add('pulse');buzz(10);setTimeout(()=>c.classList.remove('pulse'),600)});
+  }
+  $$('.tf').forEach(b=>b.onclick=()=>{$$('.tf').forEach(x=>x.classList.toggle('on',x===b));render(b.dataset.k);buzz(10)});
+  render('all');
 })();
 
 /* ================= JOURNEY ================= */
